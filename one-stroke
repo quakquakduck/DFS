@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+
+pair<double, double> cor[15];
+
+int n, now;
+bool used[15];
+long double m = 1e9;
+
+double l = 0;
+
+//計算距離
+double r(pair<double, double> a, pair<double, double> b){
+    double ans;
+    double x = a.first-b.first, y = a.second-b.second;
+    ans = sqrt(x*x+y*y);
+    return ans;
+}
+
+// dfs實作
+void dfs(int depth, int now){
+    if (!depth){
+        for (int i = 0 ; i < n ; i++){
+            now = i;
+            used[i] = 1;
+            dfs(depth+1, now);
+            used[i] = 0;
+        }
+    }
+    if (depth == n){
+        if (l < m){
+            m = l;
+        }
+    }
+    
+    for (int i = 0 ; i < n ; i++){
+        if (!used[i]){
+            int d = r(cor[i], cor[now]);
+            l += d;
+            now = i;
+            used[i] = 1;
+            dfs(depth+1, now);
+            used[i] = 0;
+            l -= d;
+        }
+    }
+}
+
+int main(){
+    ios_base::sync_with_stdio(0), cin.tie(0);
+    cin >> n;
+    for (int i = 0 ; i < n ; i++){
+        cin >> cor[i].first >> cor[i].second; 
+    }
+    dfs(0, 0);
+    cout << fixed << setprecision(2) << m << "\n";
+
+}
