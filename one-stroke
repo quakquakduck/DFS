@@ -32,6 +32,7 @@ void dfs(int depth, int now){
         if (l < m){
             m = l;
         }
+        return;
     }
     
     for (int i = 0 ; i < n ; i++){
@@ -45,6 +46,7 @@ void dfs(int depth, int now){
             l -= d;
         }
     }
+    return;
 }
 
 int main(){
