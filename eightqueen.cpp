@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int pos[19][19]; //棋盤
+
 int n;
 long long int ans;
 
